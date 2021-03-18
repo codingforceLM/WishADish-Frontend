@@ -5,8 +5,13 @@
         dark
     >
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
-
-      <v-toolbar-title>Title</v-toolbar-title>
+      <v-img
+        :src="require('./assets/logo_sl.png')"
+        max-height="60"
+        max-width="120"
+        contain
+      >
+      </v-img>
     </v-app-bar>
 
     <v-navigation-drawer
