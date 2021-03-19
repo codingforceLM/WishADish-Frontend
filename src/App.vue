@@ -30,4 +30,8 @@
     }
   }
 }
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
 </style>

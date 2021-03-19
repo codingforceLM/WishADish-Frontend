@@ -72,19 +72,9 @@ export default {
   created() {
     this.fetchGroups()
   },
-  /* beforeCreate: function () {
-     this.$options.computed =
-         mapGetters(["allGroups", "singleGroup"])
-     this.$options.methods = {
-       ...mapActions(["fetchGroups", "fetchGroup"]),
-     }
-   }*/
 }
 </script>
 
 <style scoped>
-.break {
-  flex-basis: 100%;
-  height: 0;
-}
+
 </style>
