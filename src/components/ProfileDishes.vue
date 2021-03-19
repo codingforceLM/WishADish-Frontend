@@ -31,7 +31,7 @@
 import {mapActions, mapGetters} from "vuex";
 
 export default {
-name: "ProfileGroup",
+name: "ProfileDishes",
   methods: {
     ...mapActions(["fetchUserDish"]),
   },
