@@ -5,7 +5,7 @@
           <ProfileLeft />
       </v-col>
       <v-col md="6">
-        <ProfileGroup />
+        <ProfileDishes />
       </v-col>
     </v-layout>
   </v-container>
@@ -14,10 +14,10 @@
 
 <script>
 import ProfileLeft from "@/components/ProfileLeft";
-import ProfileGroup from "@/components/ProfileGroup";
+import ProfileDishes from "@/components/ProfileDishes";
 export default {
 name: "Profile",
-  components: {ProfileGroup, ProfileLeft}
+  components: {ProfileDishes, ProfileLeft}
 }
 </script>
 
