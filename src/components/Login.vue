@@ -2,7 +2,7 @@
   <v-container>
     <div id="content">
       <v-row justify="center">
-        <v-col cols="5">
+        <v-col cols="4">
           <v-img
               :src="require('../assets/wishdishlogo.png')"
               contain
