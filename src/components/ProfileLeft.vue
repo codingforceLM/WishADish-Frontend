@@ -3,7 +3,7 @@
     <v-layout row justify-start>
       <div class="break"></div>
       <v-col align="start" >
-        <v-img height="250px" width="250px" src='https://i.etsystatic.com/10036582/r/il/fd9f8e/1296541546/il_570xN.1296541546_98xd.jpg'></v-img>
+        <v-img height="250px" width="250px" :src='singleUser.fileurl'></v-img>
       </v-col>
       <v-col align="start" >
         <v-card-title>Name: {{singleUser.firstname}} {{singleUser.lastname}}</v-card-title>
