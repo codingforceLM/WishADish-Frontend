@@ -1,5 +1,5 @@
 <template>
-  <v-container my-n5>
+  <v-container>
     <v-layout row wrap align-end>
       <h1>Gruppen</h1>
       <div class="break"></div>

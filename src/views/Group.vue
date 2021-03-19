@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid >
+  <v-app fluid >
     <v-layout row justify-space-between >
       <v-col md="6" >
         <GroupList />
@@ -8,7 +8,7 @@
         <GroupDetails />
       </v-col>
     </v-layout>
-  </v-container>
+  </v-app>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <v-container my-n5>
+  <v-container>
     <v-layout row justify-start>
       <div class="break"></div>
       <v-col align="start" >
