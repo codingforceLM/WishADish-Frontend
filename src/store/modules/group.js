@@ -59,8 +59,8 @@ const actions = {
 
 
 const mutations = {
-    setGroups: (state, matches) => (state.groupList = matches),
-    setGroup: (state, matches) => (state.group = matches)
+    setGroups: (state, groupList) => (state.groupList = groupList),
+    setGroup: (state, group) => (state.group = group)
 };
 
 
