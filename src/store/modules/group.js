@@ -1,4 +1,5 @@
 import axios from 'axios';
+import store from '@/store'
 
 const state = {
     groupList: [],
@@ -14,9 +15,13 @@ const getters = {
 const actions = {
     async fetchGroups({commit}) {
         try {
+            const userId = store.getters.userId
+            if(userId == ''){
+                console.log("error: userId unknown")
+            }
             const response = await axios.get('http://localhost:3000/api/group', {
                 headers: {
-                    'userId': '8bdb8aed-e579-4b25-a16a-9cf219572ca7'
+                    'userId': userId
                 }
             });
             if (response.status == 200) {
