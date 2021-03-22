@@ -25,8 +25,7 @@
           <v-card-title>
             <span class="headline font-weight-bold">Gericht erstellen</span>
           </v-card-title>
-          <v-card-text>
-            <v-container>
+            <v-container fluid>
               <v-row>
                 <v-col
                     cols="12"
@@ -36,47 +35,62 @@
                       required
                   ></v-text-field>
                 </v-col>
-
+              </v-row>
+              <v-row>
                 <v-col
                     cols="12"
-                    sm="6"
-                    md="4"
                 >
-                  <!-- TODO properly align items in card -->
                   <v-card
-                      width="100%"
                       v-for="entry in entries" :key="entry.id"
                       class="my-1"
                   >
-                    <v-col
-                      cols="12"
+                    <v-container>
+                    <v-row
+                        no-gutters
                     >
-                      <v-select
-                          :items="ingredients"
-                          label="Zutat"
-                          v-model="entry.ingredient"
-                      ></v-select>
-                      <v-text-field
-                          label="Menge"
-                          required
-                          v-model="entry.amount"
-                      ></v-text-field>
-                      <v-select
-                          :items="units"
-                          label="Einheit"
-                          v-model="entry.unit"
-                      ></v-select>
-                      <v-btn
-                          class="mt-2"
-                          dark
-                          color="red"
-                          @click="removeEntry(entry)"
+                      <v-col
+                        cols="7"
                       >
-                        <v-icon dark>
-                          mdi-close
-                        </v-icon>
-                      </v-btn>
-                    </v-col>
+                        <v-select
+                            :items="ingredients"
+                            label="Zutat"
+                            v-model="entry.ingredient"
+                        ></v-select>
+                      </v-col>
+                      <v-col
+                        cols="2"
+                      >
+                        <v-text-field
+                            label="Menge"
+                            required
+                            v-model="entry.amount"
+                        ></v-text-field>
+                      </v-col>
+                      <v-col
+                        cols="2"
+                      >
+                        <v-select
+                            :items="units"
+                            label="Einheit"
+                            v-model="entry.unit"
+                        ></v-select>
+                      </v-col>
+                      <v-col
+                        cols="1"
+                      >
+                        <v-btn
+                            class="mt-2"
+                            dark
+                            color="red"
+                            @click="removeEntry(entry)"
+                        >
+                          <v-icon dark>
+                            mdi-close
+                          </v-icon>
+                        </v-btn>
+                      </v-col>
+                    </v-row>
+                    </v-container>
                   </v-card>
                   <v-btn
                       class="mt-2"
@@ -91,8 +105,8 @@
                 </v-col>
 
               </v-row>
+
             </v-container>
-          </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn
