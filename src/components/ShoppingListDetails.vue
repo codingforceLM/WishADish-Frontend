@@ -1,9 +1,10 @@
 <template>
   <v-container>
-    <v-layout row wrap align-end>
+    <v-row wrap align-end>
       <h1>{{singleShoppingList.name}}</h1>
         <v-btn
             icon
+            class="my-1"
         >
           <v-icon style="horizontal-align: middle">mdi-format-list-bulleted-square</v-icon>
         </v-btn>
@@ -25,9 +26,10 @@
       <v-card
           width="100%"
           v-for="ingredients in singleShoppingList.ingredients" :key="ingredients.id"
+          class="my-1"
       >
 
-        <v-layout row wrap>
+        <v-row wrap>
 
           <v-col>
             <v-list-item >
@@ -48,11 +50,11 @@
                 v-model="ingredients.done"
             ></v-checkbox>
           </v-col>
-        </v-layout>
+        </v-row>
 
       </v-card>
 
-    </v-layout>
+    </v-row>
   </v-container>
 </template>
 

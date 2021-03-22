@@ -1,9 +1,10 @@
 <template>
   <v-container>
-    <v-layout row wrap align-end>
+    <v-row wrap align-end>
       <h1>Einkaufslisten</h1>
       <v-btn
           icon
+          class="my-1"
       >
         <v-icon>mdi-plus</v-icon>
       </v-btn>
@@ -32,8 +33,9 @@
           width="100%"
           v-for="group in allShoppingLists" :key="group.id"
           @click="changeDetails(group.id)"
+          class="my-1"
       >
-        <v-layout row wrap no-gutters>
+        <v-row wrap no-gutters>
 
           <v-col>
             <v-card-title> {{ group.name }}</v-card-title>
@@ -50,11 +52,11 @@
             </v-card-actions>
           </v-col>
 
-        </v-layout>
+        </v-row>
 
       </v-card>
 
-    </v-layout>
+    </v-row>
   </v-container>
 </template>
 
