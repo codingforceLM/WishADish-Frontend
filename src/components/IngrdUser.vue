@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-layout row wrap align-end>
+    <v-row wrap align-end>
       <h1>Eigene Zutaten</h1>    <v-btn
         class="mx-2"
         dark
@@ -34,8 +34,9 @@
       <v-card
           width="100%"
           v-for="ingrd in allUserIngrd" :key="ingrd.id"
+          class="my-1"
       >
-        <v-layout row wrap no-gutters>
+        <v-row wrap no-gutters>
 
           <v-col>
             <v-card-title> {{ ingrd.name }}</v-card-title>
@@ -53,11 +54,11 @@
             </v-card-actions>
           </v-col>
 
-        </v-layout>
+        </v-row>
 
       </v-card>
 
-    </v-layout>
+    </v-row>
   </v-container>
 </template>
 
