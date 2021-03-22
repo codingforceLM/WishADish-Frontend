@@ -2,6 +2,13 @@
   <v-container>
     <v-layout row wrap align-end>
       <h1>{{singleDish.name}}</h1>
+      <v-btn
+          icon
+      >
+        <v-icon dark>
+          mdi-format-list-bulleted-square
+        </v-icon>
+      </v-btn>
       <div class="break"></div>
       <h2>Zutatenliste</h2>
       <v-col align="start" >

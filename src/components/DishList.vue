@@ -2,6 +2,13 @@
   <v-container>
     <v-layout row wrap align-end>
       <h1>Eigene Gerichte</h1>
+      <v-btn
+          icon
+      >
+        <v-icon dark>
+          mdi-plus
+        </v-icon>
+      </v-btn>
       <div class="break"></div>
       <v-col align="start">
 
