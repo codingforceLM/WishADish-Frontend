@@ -33,11 +33,11 @@ import {mapActions, mapGetters} from "vuex";
 export default {
 name: "ProfileDishes",
   methods: {
-    ...mapActions(["fetchUserDish"]),
+    ...mapActions(["fetchDishes"]),
   },
   computed: mapGetters(["allUserDishes"]),
   created() {
-    this.fetchUserDish()
+    this.fetchDishes()
   },
 }
 </script>

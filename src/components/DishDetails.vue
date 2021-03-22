@@ -1,9 +1,9 @@
 <template>
   <v-container>
     <v-layout row wrap align-end>
-      <h1>Mitglieder</h1>
+      <h1>{{singleDish.name}}</h1>
       <div class="break"></div>
-      <h2>{{singleGroup.name}}</h2>
+      <h2>Zutatenliste</h2>
       <v-col align="start" >
 
         <v-btn
@@ -15,7 +15,7 @@
       </v-col>
       <v-card
           width="100%"
-          v-for="user in singleGroup.user" :key="user.id"
+          v-for="dish in singleDish.ingredients" :key="dish.id"
       >
 
         <v-layout row wrap>
@@ -23,22 +23,15 @@
           <v-col>
 
             <v-list-item >
-              <v-list-item-avatar color="grey darken-3">
-                <v-img
-                    class="elevation-6"
-                    alt=""
-                    :src='user.fileurl'
-                ></v-img>
-              </v-list-item-avatar>
               <v-list-item-title >
-                {{ user.name }}
+                {{ dish.name }}
               </v-list-item-title>
             </v-list-item>
           </v-col>
           <v-col>
             <v-list-item >
             <v-list-item-title >
-              {{ user.role }}
+              {{ dish.amount  }} {{ dish.unit  }}
             </v-list-item-title>
             </v-list-item>
           </v-col>
@@ -65,14 +58,11 @@
 import {mapActions, mapGetters} from "vuex";
 
 export default {
-  name: "GroupDetails",
+  name: "DishDetails",
   methods: {
-    ...mapActions(["fetchGroup"]),
+    ...mapActions(["fetchDish"]),
   },
-  computed: mapGetters(["singleGroup"]),
-  created() {
-
-  },
+  computed: mapGetters(["singleDish"]),
 
 }
 </script>

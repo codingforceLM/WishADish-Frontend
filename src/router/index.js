@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import LoginPage from '../views/LoginPage.vue'
 import Group from '../views/Group.vue'
+import Dish from '../views/Dish.vue'
 
 Vue.use(VueRouter)
 
@@ -31,7 +32,12 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
+  },
+    {
+        path: '/dish',
+        name: 'Dish',
+        component: Dish
+    }
 
 ]
 
