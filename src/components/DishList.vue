@@ -1,7 +1,16 @@
 <template>
   <v-container>
-    <v-layout row wrap align-end>
-      <h1>Gruppen</h1>
+    <v-row wrap align-end>
+      <h1>Eigene Gerichte</h1>
+      <v-btn
+          class="mx-2"
+          dark
+          color="indigo"
+      >
+        <v-icon dark>
+          mdi-plus
+        </v-icon>
+      </v-btn>
       <div class="break"></div>
       <v-col align="start">
 
@@ -25,14 +34,14 @@
       <div class="break"></div>
       <v-card
           width="100%"
-          v-for="group in allGroups" :key="group.id"
+          v-for="group in allDishes" :key="group.id"
           @click="changeDetails(group.id)"
+          class="my-1"
       >
-        <v-layout row wrap no-gutters>
+        <v-row wrap no-gutters>
 
           <v-col>
-            <v-card-title> {{ group.title }}</v-card-title>
-            <v-card-text>Erstellt am {{ group.creation }}</v-card-text>
+            <v-card-title> {{ group.name }}</v-card-title>
           </v-col>
           <v-col>
             <v-card-actions>
@@ -46,11 +55,11 @@
             </v-card-actions>
           </v-col>
 
-        </v-layout>
+        </v-row>
 
       </v-card>
 
-    </v-layout>
+    </v-row>
   </v-container>
 </template>
 
@@ -58,17 +67,17 @@
 import {mapActions, mapGetters} from "vuex";
 
 export default {
-  name: "GroupList",
+  name: "DishList",
   methods: {
-    ...mapActions(["fetchGroups", "fetchGroup"]),
+    ...mapActions(["fetchDishes", "fetchDish"]),
     changeDetails: function (id) {
-      this.fetchGroup(id)
+      this.fetchDish(id)
       console.log(id)
     }
   },
-  computed: mapGetters(["allGroups", "singleGroup"]),
+  computed: mapGetters(["allDishes", "singleDish"]),
   created() {
-    this.fetchGroups()
+    this.fetchDishes()
   },
 }
 </script>
