@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-layout row wrap align-end>
+    <v-row wrap align-end>
       <h1>Eigene Gerichte</h1>
       <v-btn
           icon
@@ -34,8 +34,9 @@
           width="100%"
           v-for="group in allDishes" :key="group.id"
           @click="changeDetails(group.id)"
+          class="my-1"
       >
-        <v-layout row wrap no-gutters>
+        <v-row wrap no-gutters>
 
           <v-col>
             <v-card-title> {{ group.name }}</v-card-title>
@@ -52,11 +53,11 @@
             </v-card-actions>
           </v-col>
 
-        </v-layout>
+        </v-row>
 
       </v-card>
 
-    </v-layout>
+    </v-row>
   </v-container>
 </template>
 
