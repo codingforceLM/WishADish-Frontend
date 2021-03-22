@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-layout row justify-start>
+    <v-row justify-start>
       <div class="break"></div>
       <v-col align="start" >
         <v-img height="250px" width="250px" :src='singleUser.fileurl'></v-img>
@@ -22,7 +22,7 @@
           Bearbeiten
         </v-btn>
       </v-col>
-    </v-layout>
+    </v-row>
   </v-container>
 
 </template>

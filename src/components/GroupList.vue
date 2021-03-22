@@ -1,7 +1,16 @@
 <template>
   <v-container>
-    <v-layout row wrap align-end>
+    <v-row wrap align-end>
       <h1>Gruppen</h1>
+      <v-btn
+          class="mx-2"
+          dark
+          color="indigo"
+      >
+        <v-icon dark>
+          mdi-plus
+        </v-icon>
+      </v-btn>
       <div class="break"></div>
       <v-col align="start">
 
@@ -27,8 +36,9 @@
           width="100%"
           v-for="group in allGroups" :key="group.id"
           @click="changeDetails(group.id)"
+          class="my-1"
       >
-        <v-layout row wrap no-gutters>
+        <v-row wrap no-gutters>
 
           <v-col>
             <v-card-title> {{ group.title }}</v-card-title>
@@ -46,11 +56,11 @@
             </v-card-actions>
           </v-col>
 
-        </v-layout>
+        </v-row>
 
       </v-card>
 
-    </v-layout>
+    </v-row>
   </v-container>
 </template>
 
