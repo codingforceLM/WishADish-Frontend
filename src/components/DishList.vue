@@ -3,7 +3,9 @@
     <v-row wrap align-end>
       <h1>Eigene Gerichte</h1>
       <v-btn
-          icon
+          class="mx-2"
+          dark
+          color="indigo"
       >
         <v-icon dark>
           mdi-plus
