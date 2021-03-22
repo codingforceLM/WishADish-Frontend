@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-layout row wrap align-end>
+    <v-row wrap align-end>
       <h1>{{singleDish.name}}</h1>
       <v-btn
           icon
@@ -23,9 +23,10 @@
       <v-card
           width="100%"
           v-for="dish in singleDish.ingredients" :key="dish.id"
+          class="my-1"
       >
 
-        <v-layout row wrap>
+        <v-row wrap>
 
           <v-col>
 
@@ -53,11 +54,11 @@
               </v-btn>
             </v-card-actions>
           </v-col>
-        </v-layout>
+        </v-row>
 
       </v-card>
 
-    </v-layout>
+    </v-row>
   </v-container>
 </template>
 
