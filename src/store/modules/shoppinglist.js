@@ -2,28 +2,28 @@ import axios from 'axios';
 import store from '@/store'
 
 const state = {
-    userDish: [],
-    singleDish: {}
+    userList: [],
+    list: {}
 };
 
 const getters = {
-    allDishes:  state => state.userDish,
-    singleDish: state => state.singleDish
+    allShoppingLists:  state => state.userList,
+    singleShoppingList:  state => state.list
 };
 
 
 const actions = {
-    async fetchDishes({commit}) {
+    async fetchShoppingLists({commit}) {
         try {
-            const response = await axios.get(`http://localhost:3000/api/dish/`, {
+            const response = await axios.get(`http://localhost:3000/api/list/`, {
                 headers: {
                     'userId': store.getters.userId
                 }
             });
-            console.log("fetchDishes:")
+            console.log("fetchUserLists:")
             console.log(response)
             if (response.status == 200) {
-                commit('setUserDish', response.data);
+                commit('setUserList', response.data);
             } else {
                 console.log("error: "+response.statusText)
             }
@@ -31,13 +31,18 @@ const actions = {
             console.error(error);
         }
     },
-    async fetchDish({commit}, id) {
+
+    async fetchShoppingList({commit},id) {
         try {
-            const response = await axios.get(`http://localhost:3000/api/dish/${id}`);
-            console.log("fetchDish:")
+            const response = await axios.get(`http://localhost:3000/api/list/${id}`, {
+                headers: {
+                    'userId': store.getters.userId
+                }
+            });
+            console.log("fetchList:")
             console.log(response)
             if (response.status == 200) {
-                commit('setSingleDish', response.data);
+                commit('setSingleList', response.data);
             } else {
                 console.log("error: "+response.statusText)
             }
@@ -46,13 +51,12 @@ const actions = {
         }
     }
 
-
 };
 
 
 const mutations = {
-    setUserDish: (state, userDish) => (state.userDish = userDish),
-    setSingleDish: (state, singleDish) => (state.singleDish = singleDish)
+    setUserList: (state, userList) => (state.userList = userList),
+    setSingleList: (state, list) => (state.list = list),
 };
 
 
