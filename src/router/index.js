@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import LoginPage from '../views/LoginPage.vue'
 import Ingrd from '../views/Ingrd.vue'
 import Group from '../views/Group.vue'
+import Register from "../views/Register";
 import Dish from '../views/Dish.vue'
 import ShoppingList from '../views/ShoppingList'
 
@@ -27,6 +28,11 @@ const routes = [
     name: 'Login',
     component: LoginPage
   },
+    {
+        path: '/register',
+        name: 'Register',
+        component: Register
+    },
   {
     path: '/about',
     name: 'About',
