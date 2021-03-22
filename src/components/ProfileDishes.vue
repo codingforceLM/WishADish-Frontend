@@ -4,13 +4,14 @@
     <h1>Eigene Gerichte</h1>
     <div class="break"></div>
     <v-col />
-    <v-layout row wrap>
+    <v-row wrap>
       <v-card
           width="100%"
-          v-for="dish in allUserDishes" :key="dish.id"
+          v-for="dish in allDishes" :key="dish.id"
+          class="my-1"
       >
 
-        <v-layout row>
+        <v-row >
           <v-col>
             <v-list-item >
               <v-list-item-title >
@@ -18,11 +19,11 @@
               </v-list-item-title>
             </v-list-item>
           </v-col>
-        </v-layout>
+        </v-row>
 
       </v-card>
 
-    </v-layout>
+    </v-row>
   </v-container>
 
 </template>
@@ -35,7 +36,7 @@ name: "ProfileDishes",
   methods: {
     ...mapActions(["fetchDishes"]),
   },
-  computed: mapGetters(["allUserDishes"]),
+  computed: mapGetters(["allDishes"]),
   created() {
     this.fetchDishes()
   },
