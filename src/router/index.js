@@ -40,12 +40,12 @@ const routes = [
         path: '/dish',
         name: 'Dish',
         component: Dish
-    },
+    },{
 
         path: '/shoppinglist',
         name: 'ShoppingList',
         component: ShoppingList
-    },
+    },{
 
         path: '/ingrd',
         name: 'Ingrd',
