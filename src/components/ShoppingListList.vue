@@ -3,10 +3,13 @@
     <v-row wrap align-end>
       <h1>Einkaufslisten</h1>
       <v-btn
-          icon
-          class="my-1"
+          class="mx-2"
+          dark
+          color="indigo"
       >
-        <v-icon>mdi-plus</v-icon>
+        <v-icon dark>
+          mdi-plus
+        </v-icon>
       </v-btn>
       <div class="break"></div>
       <v-col align="start">

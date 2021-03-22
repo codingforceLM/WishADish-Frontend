@@ -2,12 +2,15 @@
   <v-container>
     <v-row wrap align-end>
       <h1>{{singleShoppingList.name}}</h1>
-        <v-btn
-            icon
-            class="my-1"
-        >
-          <v-icon style="horizontal-align: middle">mdi-format-list-bulleted-square</v-icon>
-        </v-btn>
+      <v-btn
+          class="mx-2"
+          dark
+          color="indigo"
+      >
+        <v-icon dark>
+          mdi-format-list-bulleted-square
+        </v-icon>
+      </v-btn>
 
       <div class="break"></div>
           <v-checkbox
