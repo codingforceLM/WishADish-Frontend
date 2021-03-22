@@ -3,11 +3,13 @@ import store from '@/store'
 
 const state = {
     userIngrd: [],
+    singleIngrd: {},
     systemIngrd: []
 };
 
 const getters = {
     allUserIngrd:  state => state.userIngrd,
+    singleIngrd:  state => state.singleIngrd,
     systemIngrd: state => state.systemIngrd
 };
 
@@ -23,6 +25,21 @@ const actions = {
             console.log(response)
             if (response.status == 200) {
                 commit('setUserIngrd', response.data);
+            } else {
+                console.log("error: "+response.statusText)
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    },
+
+    async fetchIngrd({commit},id) {
+        try {
+            const response = await axios.get(`http://localhost:3000/api/ingrd/${id}`);
+            console.log("fetchIngrd:")
+            console.log(response)
+            if (response.status == 200) {
+                commit('setSingleIngrd', response.data);
             } else {
                 console.log("error: "+response.statusText)
             }
@@ -55,7 +72,9 @@ const actions = {
 
 const mutations = {
     setUserIngrd: (state, userIngrd) => (state.userIngrd = userIngrd),
+    setSingleIngrd: (state, userIngrd) => (state.userIngrd = userIngrd),
     setSystemIngrd: (state, systemIngrd) => (state.systemIngrd = systemIngrd)
+
 };
 
 

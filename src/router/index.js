@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import LoginPage from '../views/LoginPage.vue'
 import Ingrd from '../views/Ingrd.vue'
 import Group from '../views/Group.vue'
-
+import ShoppingList from '../views/ShoppingList'
 Vue.use(VueRouter)
 
 const routes = [
@@ -34,10 +34,17 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
     {
+
+        path: '/shoppinglist',
+        name: 'ShoppingList',
+        component: ShoppingList
+    },
+
         path: '/ingrd',
         name: 'Ingrd',
         component: Ingrd
     },
+
 
 ]
 
