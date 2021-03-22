@@ -1,20 +1,22 @@
 import axios from 'axios';
+import store from '@/store'
 
 const state = {
-    userIngrd: []
+    userIngrd: [],
+    systemIngrd: []
 };
 
 const getters = {
-    allUserIngrd:  state => state.userIngrd
+    allUserIngrd:  state => state.userIngrd,
+    systemIngrd: state => state.systemIngrd
 };
-
 
 const actions = {
     async fetchUserIngrd({commit}) {
         try {
             const response = await axios.get(`http://localhost:3000/api/ingrd/`, {
                 headers: {
-                    'userId': '8bdb8aed-e579-4b25-a16a-9cf219572ca7'
+                    'userId': store.getters.userId
                 }
             });
             console.log("fetchUserIngrd:")
@@ -27,13 +29,33 @@ const actions = {
         } catch (error) {
             console.error(error);
         }
-    }
+    },
 
+    async fetchDeufaultIngrd({commit}) {
+        try {
+            const systemUser = 'dbaaa759-149b-4fa4-8451-b87a18837b2a'
+            const response = await axios.get(`http://localhost:3000/api/ingrd/`, {
+                headers: {
+                    'userId': systemUser
+                }
+            });
+            console.log("fetchUserIngrd:")
+            console.log(response)
+            if (response.status == 200) {
+                commit('setSystemIngrd', response.data);
+            } else {
+                console.log("error: "+response.statusText)
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
 };
 
 
 const mutations = {
-    setUserIngrd: (state, userIngrd) => (state.userIngrd = userIngrd)
+    setUserIngrd: (state, userIngrd) => (state.userIngrd = userIngrd),
+    setSystemIngrd: (state, systemIngrd) => (state.systemIngrd = systemIngrd)
 };
 
 
