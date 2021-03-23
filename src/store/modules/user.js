@@ -1,11 +1,14 @@
 import axios from 'axios';
-import store from '@/store'
+import store from '@/store';
+
 const state = {
-    user: {}
+    user: {},
+    groups: [],
 };
 
 const getters = {
-    singleUser:  state => state.user
+    singleUser:  state => state.user,
+    groups: state => state.groups
 };
 
 
@@ -28,13 +31,25 @@ const actions = {
         } catch (error) {
             console.error(error);
         }
+    },
+    async fetchUserGroups({commit}) {
+        try {
+            const response = await axios.get('http://localhost:3000/api/user/'+store.getters.userId+'/groups');
+            if (response.status === 200) {
+                commit('setUserGroups', response.data);
+            } else {
+                console.log("error: "+response.statusText)
+            }
+        } catch (error) {
+            console.error(error);
+        }
     }
-
 };
 
 
 const mutations = {
-    setUser: (state, user) => (state.user = user)
+    setUser: (state, user) => (state.user = user),
+    setUserGroups: (state, groups) => (state.groups = groups)
 };
 
 

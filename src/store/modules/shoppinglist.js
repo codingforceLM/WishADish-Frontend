@@ -78,8 +78,23 @@ const actions = {
         } catch (error) {
             console.error(error);
         }
-    }
+    },
+    async saveNewShoppingList({dispatch}, {title, groupId}) {
+        const response = await axios.post('http://localhost:3000/api/list', {}, {
+            headers: {
+                userId: store.getters.userId,
+                name: title,
+                groupId: groupId,
+            }
+        });
 
+        if(response.status === 404 || response.status === 400) {
+            return false;
+        } else {
+            dispatch('fetchShoppingLists');
+            return true;
+        }
+    }
 };
 
 
