@@ -3,12 +3,14 @@ import store from '@/store'
 
 const state = {
     userWishDate: [],
-    userWishMonth: []
+    userWishMonth: [],
+    selectedDate: ""
 };
 
 const getters = {
     allUserWishDate: state => state.userWishDate,
-    allUserWishMonth: state => state.userWishMonth
+    allUserWishMonth: state => state.userWishMonth,
+    selectedDate: state => state.selectedDate
 };
 
 
@@ -93,7 +95,7 @@ const mutations = {
     setUserWishToday: (state, userWishDate) => (state.userWishDate = userWishDate),
     setUserWishDate: (state, userWishDate) => (state.userWishDate = userWishDate),
     setUserWishMonth: (state, userWishMonth) => (state.userWishMonth = userWishMonth),
-
+    setSelectedDate: (state, selectedDate) => (state.selectedDate = selectedDate)
 };
 
 

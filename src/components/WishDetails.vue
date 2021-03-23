@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row wrap align-end>
-      <h1 v-if="allUserWishDate[0]!=undefined">{{allUserWishDate[0].day}}</h1>
+      <h1 v-if="selectedDate!=undefined">{{selectedDate}}</h1>
       <div class="break"></div>
       <v-card
           width="100%"
@@ -36,13 +36,17 @@ import {mapActions, mapGetters} from "vuex";
 
 export default {
   name: "WishDetails",
+  data:() => ({
+    date: this.WishCalendar.data().date
+  }),
   methods: {
-    ...mapActions(["fetchUserWishToday",]),
+    ...mapActions(["fetchUserWishToday"]),
   },
-  computed: mapGetters(["allUserWishDate"]),
+  computed: mapGetters(["allUserWishDate","selectedDate"]),
   created() {
     this.fetchUserWishToday()
   },
+
 
 }
 </script>

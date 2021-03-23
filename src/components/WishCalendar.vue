@@ -24,11 +24,11 @@ export default {
   methods: {
     ...mapActions(["fetchUserWishDate","fetchUserWishMonth"]),
     changeDetails: function () {
-      this.getWishdates()
       let month = this.date.substr(5,2)
       let day = this.date.substr(8,2)
       let year = this.date.substr(0,4)
       this.fetchUserWishDate({day,month,year})
+      this.$store.commit("setSelectedDate",this.date)
     },
     getWishdates: function (date){
       let wishes = this.allUserWishMonth
@@ -45,6 +45,7 @@ export default {
     let month = this.date.substr(5,2)
     let year = this.date.substr(0,4)
     this.fetchUserWishMonth({month,year})
+    this.$store.commit("setSelectedDate",this.date)
   }
 }
 </script>
