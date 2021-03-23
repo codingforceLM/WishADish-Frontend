@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import LoginPage from '../views/LoginPage.vue'
 import Group from '../views/Group.vue'
-
+import Wish from "@/views/Wish";
 Vue.use(VueRouter)
 
 const routes = [
@@ -31,7 +31,12 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
+  },
+    {
+        path: '/wish',
+        name: 'Wish',
+        component: Wish
+    }
 
 ]
 
