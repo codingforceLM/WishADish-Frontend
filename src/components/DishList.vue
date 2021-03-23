@@ -54,6 +54,8 @@
                         <v-select
                             :items="ingredients"
                             label="Zutat"
+                            item-text="name"
+                            item-value="id"
                             v-model="entry.ingredient"
                         ></v-select>
                       </v-col>
@@ -119,7 +121,7 @@
             <v-btn
                 color="blue darken-1"
                 text
-                @click="dialog = false"
+                @click="saveDish"
             >
               Save
             </v-btn>
@@ -186,13 +188,13 @@ export default {
   name: "DishList",
   data: () => ({
     dialog: false,
-    ingredients: ["ingrd a", "ingrd b", "ingrd c", "ingrd d", "ingrd e"],
+    ingredients: [],
     units: ["liter", "milliliter", "gramm", "kilogramm"],
     id: 1,
-    entries: [{id: 1, ingredient: "", amount: "", unit: ""}]
+    entries: [{id: 1, ingredient: {id:"", name:""}, amount: "", unit: ""}]
   }),
   methods: {
-    ...mapActions(["fetchDishes", "fetchDish"]),
+    ...mapActions(["fetchDishes", "fetchDish", "fetchDeufaultIngrd", "fetchUserIngrd"]),
     changeDetails: function (id) {
       this.fetchDish(id)
       console.log(id)
@@ -202,12 +204,20 @@ export default {
       this.entries.splice(index, 1);
     },
     newEntry() {
-      this.entries.push({id: this.id, ingredient: "", amount: "", unit: ""})
+      ++this.id;
+      this.entries.push({id: this.id, ingredient: {id:"", name:""}, amount: "", unit: ""})
+    },
+    saveDish() {
+      console.log(this.entries)
     }
   },
-  computed: mapGetters(["allDishes", "singleDish"]),
+  computed: mapGetters(["allDishes", "singleDish", "allUserIngrd", "systemIngrd"]),
   created() {
     this.fetchDishes()
+    this.fetchDeufaultIngrd()
+    this.fetchUserIngrd()
+    this.ingredients = this.$store.getters.allUserIngrd
+    this.ingredients.concat(this.$store.getters.systemIngrd)
   },
 }
 </script>
