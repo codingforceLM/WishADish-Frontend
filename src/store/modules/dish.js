@@ -44,15 +44,44 @@ const actions = {
         } catch (error) {
             console.error(error);
         }
+    },
+    async saveNewDish({dispatch}, {title, entries}) {
+        if(!Array.isArray(entries)) {
+            return false;
+        }
+
+        let ingrdj = [];
+        for(let i=0;i<entries.length;i++) {
+            ingrdj.push({
+                "id": entries[i].ingredient,
+                "amount": entries[i].amount,
+                "unit": entries[i].unit
+            })
+        }
+
+        const response = await axios.post('http://localhost:3000/api/dish/', {}, {
+            headers: {
+                userId: store.getters.userId,
+                name: title,
+                ingredients: JSON.stringify(ingrdj)
+            }
+        });
+
+        if(response.status === 404 || response.status === 400) {
+            return false;
+        } else {
+            await dispatch('fetchDishes');
+            return true;
+        }
     }
-
-
 };
 
 
 const mutations = {
     setUserDish: (state, userDish) => (state.userDish = userDish),
-    setSingleDish: (state, singleDish) => (state.singleDish = singleDish)
+    setSingleDish: (state, singleDish) => (state.singleDish = singleDish),
+    // TODO maybe do it better - idk?
+    // dummy: (state) => (state)
 };
 
 

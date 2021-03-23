@@ -32,6 +32,7 @@
                 >
                   <v-text-field
                       label="Titel"
+                      v-model="title"
                       required
                   ></v-text-field>
                 </v-col>
@@ -191,10 +192,11 @@ export default {
     ingredients: [],
     units: ["liter", "milliliter", "gramm", "kilogramm"],
     id: 1,
+    title: "",
     entries: [{id: 1, ingredient: {id:"", name:""}, amount: "", unit: ""}]
   }),
   methods: {
-    ...mapActions(["fetchDishes", "fetchDish", "fetchDeufaultIngrd", "fetchUserIngrd"]),
+    ...mapActions(["fetchDishes", "fetchDish", "fetchDeufaultIngrd", "fetchUserIngrd", "saveNewDish"]),
     changeDetails: function (id) {
       this.fetchDish(id)
       console.log(id)
@@ -207,8 +209,25 @@ export default {
       ++this.id;
       this.entries.push({id: this.id, ingredient: {id:"", name:""}, amount: "", unit: ""})
     },
-    saveDish() {
+    async saveDish() {
+      if(this.entries.length === 0) {
+        // TODO display error notification
+        return;
+      }
+      for(let i=0;i<this.entries.length;i++) {
+        if([this.entries[i].id, this.entries[i].amount, this.entries[i].unit].includes("")) {
+          // TODO display error notification
+          return;
+        }
+      }
       console.log(this.entries)
+      const response = await this.saveNewDish({title: this.title, entries: this.entries});
+      if(response) {
+        // TODO some msg
+        this.dialog = false;
+      } else {
+        // TODO error notification
+      }
     }
   },
   computed: mapGetters(["allDishes", "singleDish", "allUserIngrd", "systemIngrd"]),
