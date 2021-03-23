@@ -14,6 +14,7 @@
           @click='$router.push("/")'
       >
       </v-img>
+      <v-spacer></v-spacer>
       <v-btn
           v-if="$store.getters.token == ''"
           text
@@ -22,7 +23,6 @@
       >
         <v-icon>Login</v-icon>
       </v-btn>
-      <v-spacer></v-spacer>
       <v-btn v-if="$store.getters.token != ''" @click="logout" text class="v-card__title">
         <v-icon>Logout</v-icon>
       </v-btn>
