@@ -38,7 +38,7 @@ export default {
   methods: {
     ...mapActions(["fetchUserWishToday",]),
   navWishes() {
-    this.$router.push("/dish");
+    this.$router.push("/wish");
   }},
   computed: mapGetters(["allUserWishDate"]),
   created() {
