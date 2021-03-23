@@ -14,10 +14,15 @@ const getters = {
 
 const actions = {
     async fetchShoppingLists({commit}) {
+        const userId = store.getters.userId
+        if(userId == ''){
+            console.log("error: userId unknown")
+            return
+        }
         try {
             const response = await axios.get(`http://localhost:3000/api/list/`, {
                 headers: {
-                    'userId': store.getters.userId
+                    'userId': userId
                 }
             });
             console.log("fetchUserLists:")
@@ -51,10 +56,15 @@ const actions = {
         }
     },
     async fetchShoppingListOpen({commit}) {
+        const userId = store.getters.userId
+        if(userId == ''){
+            console.log("error: userId unknown")
+            return
+        }
         try {
             const response = await axios.get(`http://localhost:3000/api/list/`, {
                 headers: {
-                    'userId': store.getters.userId,
+                    'userId': userId,
                     'done': 'true'
                 }
             });

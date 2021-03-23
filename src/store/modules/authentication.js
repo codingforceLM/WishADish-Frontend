@@ -54,7 +54,7 @@ const mutations = {
     setLoggedInUser: (state, user) => (state.userId = user),
     reset: (state) => {
         state.userId = '',
-            state.jwt = ""
+            state.token = ''
     }
 };
 

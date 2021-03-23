@@ -16,6 +16,11 @@ const getters = {
 
 const actions = {
     async fetchUserWishToday({commit}) {
+        const userId = store.getters.userId
+        if(userId == ''){
+            console.log("error: userId unknown")
+            return
+        }
         try {
             const date = new Date()
             let month = date.getMonth()+1
@@ -29,7 +34,7 @@ const actions = {
             }
             const response = await axios.get(`http://localhost:3000/api/wish/`, {
                 headers: {
-                    'userId': store.getters.userId,
+                    'userId': userId,
                     'day': day,
                     'month': month,
                     'year': year
@@ -47,10 +52,15 @@ const actions = {
         }
     },
     async fetchUserWishDate({commit},{day, month, year}) {
+        const userId = store.getters.userId
+        if(userId == ''){
+            console.log("error: userId unknown")
+            return
+        }
         try {
             const response = await axios.get(`http://localhost:3000/api/wish/`, {
                 headers: {
-                    'userId': store.getters.userId,
+                    'userId': userId,
                     'day': day,
                     'month': month,
                     'year': year
@@ -68,10 +78,15 @@ const actions = {
         }
     },
     async fetchUserWishMonth({commit},{month,year}) {
+        const userId = store.getters.userId
+        if(userId == ''){
+            console.log("error: userId unknown")
+            return
+        }
         try {
             const response = await axios.get(`http://localhost:3000/api/wish/`, {
                 headers: {
-                    'userId': store.getters.userId,
+                    'userId': userId,
                     'month': month,
                     'year': year
                 }

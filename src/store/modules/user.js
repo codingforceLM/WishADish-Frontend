@@ -15,7 +15,12 @@ const getters = {
 const actions = {
     async fetchUser({commit}) {
         try {
-            const response = await axios.get(`http://localhost:3000/api/user/tod`);
+            const userId = store.getters.userId
+            if(userId == ''){
+                console.log("error: userId unknown")
+                return
+            }
+            const response = await axios.get(`http://localhost:3000/api/user/${userId}`);
             console.log("fetchUser:")
             console.log(response)
             if (response.status == 200) {

@@ -15,9 +15,14 @@ const getters = {
 const actions = {
     async fetchDishes({commit}) {
         try {
+            const userId = store.getters.userId
+            if(userId == ''){
+                console.log("error: userId unknown")
+                return
+            }
             const response = await axios.get(`http://localhost:3000/api/dish/`, {
                 headers: {
-                    'userId': store.getters.userId
+                    'userId': userId
                 }
             });
             console.log("fetchDishes:")
@@ -46,6 +51,11 @@ const actions = {
         }
     },
     async saveNewDish({dispatch}, {title, entries}) {
+        const userId = store.getters.userId
+        if(userId == ''){
+            console.log("error: userId unknown")
+            return
+        }
         if(!Array.isArray(entries)) {
             return false;
         }
@@ -61,7 +71,7 @@ const actions = {
 
         const response = await axios.post('http://localhost:3000/api/dish/', {}, {
             headers: {
-                userId: store.getters.userId,
+                userId: userId,
                 name: title,
                 ingredients: JSON.stringify(ingrdj)
             }
