@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import store from '@/store'
 const state = {
     user: {}
 };
@@ -12,7 +12,7 @@ const getters = {
 const actions = {
     async fetchUser({commit}) {
         try {
-            const response = await axios.get(`http://localhost:3000/api/user/tod`);
+            const response = await axios.get(`http://localhost:3000/api/user/${store.getters.userId}`);
             console.log("fetchUser:")
             console.log(response)
             if (response.status == 200) {
