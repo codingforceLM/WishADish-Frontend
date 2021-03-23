@@ -10,6 +10,7 @@
         max-height="60"
         max-width="120"
         contain
+        @click='$router.push("/")'
       >
       </v-img>
     </v-app-bar>
