@@ -1,13 +1,13 @@
 <template>
   <v-app fluid >
-    <v-layout row justify-space-between >
+    <v-row class="pa-5" >
       <v-col md="6" >
           <ProfileLeft />
       </v-col>
       <v-col md="6">
         <ProfileDishes />
       </v-col>
-    </v-layout>
+    </v-row>
   </v-app>
 </template>
 

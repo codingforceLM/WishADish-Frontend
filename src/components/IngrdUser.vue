@@ -1,16 +1,15 @@
 <template>
   <v-container>
     <v-row wrap align-end>
-      <h1>Gruppen</h1>
-      <v-btn
-          class="mx-2"
-          dark
-          color="indigo"
-      >
-        <v-icon dark>
-          mdi-plus
-        </v-icon>
-      </v-btn>
+      <h1>Eigene Zutaten</h1>    <v-btn
+        class="mx-2"
+        dark
+        color="indigo"
+    >
+      <v-icon dark>
+        mdi-plus
+      </v-icon>
+    </v-btn>
       <div class="break"></div>
       <v-col align="start">
 
@@ -34,16 +33,15 @@
       <div class="break"></div>
       <v-card
           width="100%"
-          v-for="group in allGroups" :key="group.id"
-          @click="changeDetails(group.id)"
+          v-for="ingrd in allUserIngrd" :key="ingrd.id"
           class="my-1"
       >
         <v-row wrap no-gutters>
 
           <v-col>
-            <v-card-title> {{ group.title }}</v-card-title>
-            <v-card-text>Erstellt am {{ group.creation }}</v-card-text>
+            <v-card-title> {{ ingrd.name }}</v-card-title>
           </v-col>
+
           <v-col>
             <v-card-actions>
               <v-btn
@@ -68,17 +66,13 @@
 import {mapActions, mapGetters} from "vuex";
 
 export default {
-  name: "GroupList",
+  name: "IngrdUser",
   methods: {
-    ...mapActions(["fetchGroups", "fetchGroup"]),
-    changeDetails: function (id) {
-      this.fetchGroup(id)
-      console.log(id)
-    }
+    ...mapActions(["fetchUserIngrd"]),
   },
-  computed: mapGetters(["allGroups", "singleGroup"]),
+  computed: mapGetters(["allUserIngrd"]),
   created() {
-    this.fetchGroups()
+    this.fetchUserIngrd()
   },
 }
 </script>

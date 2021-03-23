@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row wrap align-end>
-      <h1>Mitglieder</h1>
+      <h1>{{singleShoppingList.name}}</h1>
       <v-btn
           class="mx-2"
           dark
@@ -13,9 +13,12 @@
       </v-btn>
 
       <div class="break"></div>
-      <h2>{{singleGroup.name}}</h2>
-      <v-col align="start" >
+          <v-checkbox
+              v-model="singleShoppingList.done"
+              label="Erledigt"
+          ></v-checkbox>
 
+      <v-col align="start" >
         <v-btn
             icon
             disabled
@@ -25,44 +28,30 @@
       </v-col>
       <v-card
           width="100%"
-          v-for="user in singleGroup.user" :key="user.id"
+          v-for="ingredients in singleShoppingList.ingredients" :key="ingredients.id"
           class="my-1"
       >
 
         <v-row wrap>
 
           <v-col>
-
             <v-list-item >
-              <v-list-item-avatar color="grey darken-3">
-                <v-img
-                    class="elevation-6"
-                    alt=""
-                    :src='user.fileurl'
-                ></v-img>
-              </v-list-item-avatar>
               <v-list-item-title >
-                {{ user.name }}
+                {{ ingredients.name }}
               </v-list-item-title>
             </v-list-item>
           </v-col>
           <v-col>
             <v-list-item >
             <v-list-item-title >
-              {{ user.role }}
+              {{ ingredients.amount }} {{ ingredients.unit }}
             </v-list-item-title>
             </v-list-item>
           </v-col>
           <v-col>
-            <v-card-actions>
-              <v-btn
-                  icon
-              >
-                <v-icon dark>
-                  mdi-format-list-bulleted-square
-                </v-icon>
-              </v-btn>
-            </v-card-actions>
+            <v-checkbox
+                v-model="ingredients.done"
+            ></v-checkbox>
           </v-col>
         </v-row>
 
@@ -76,14 +65,11 @@
 import {mapActions, mapGetters} from "vuex";
 
 export default {
-  name: "GroupDetails",
+  name: "ShoppingListDetails",
   methods: {
-    ...mapActions(["fetchGroup"]),
+    ...mapActions(["fetchShoppingList"]),
   },
-  computed: mapGetters(["singleGroup"]),
-  created() {
-
-  },
+  computed: mapGetters(["singleShoppingList"]),
 
 }
 </script>
