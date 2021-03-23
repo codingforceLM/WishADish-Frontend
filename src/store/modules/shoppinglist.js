@@ -49,6 +49,25 @@ const actions = {
         } catch (error) {
             console.error(error);
         }
+    },
+    async fetchShoppingListOpen({commit}) {
+        try {
+            const response = await axios.get(`http://localhost:3000/api/list/`, {
+                headers: {
+                    'userId': store.getters.userId,
+                    'done': 'true'
+                }
+            });
+            console.log("fetchShoppingListOpen:")
+            console.log(response)
+            if (response.status == 200) {
+                commit('setUserList', response.data);
+            } else {
+                console.log("error: "+response.statusText)
+            }
+        } catch (error) {
+            console.error(error);
+        }
     }
 
 };
