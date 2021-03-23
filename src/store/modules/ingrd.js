@@ -66,6 +66,21 @@ const actions = {
         } catch (error) {
             console.error(error);
         }
+    },
+    async saveNewIngrd({dispatch}, title) {
+        const response = await axios.post('http://localhost:3000/api/ingrd/', {}, {
+            headers: {
+                userId: store.getters.userId,
+                name: title,
+            }
+        });
+
+        if(response.status === 404 || response.status === 400) {
+            return false;
+        } else {
+            dispatch('fetchUserIngrd');
+            return true;
+        }
     }
 };
 
