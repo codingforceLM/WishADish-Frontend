@@ -18,6 +18,7 @@ const actions = {
             const userId = store.getters.userId
             if(userId == ''){
                 console.log("error: userId unknown")
+                return
             }
             const response = await axios.get('http://localhost:3000/api/group', {
                 headers: {
@@ -46,19 +47,6 @@ const actions = {
             console.error(error);
         }
     },
-
-    async filterMatches({commit}, e) {
-        // Get selected number
-        const stars = parseInt(
-            e.target.options[e.target.options.selectedIndex].innerText
-        );
-
-        const response = await axios.get(
-            `http://localhost:8080/api/hltv/today?stars=${stars}`
-        );
-
-        commit('setMatches', response.data);
-    }
 
 };
 

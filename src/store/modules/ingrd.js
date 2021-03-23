@@ -15,10 +15,15 @@ const getters = {
 
 const actions = {
     async fetchUserIngrd({commit}) {
+        const userId = store.getters.userId
+        if(userId == ''){
+            console.log("error: userId unknown")
+            return
+        }
         try {
             const response = await axios.get(`http://localhost:3000/api/ingrd/`, {
                 headers: {
-                    'userId': store.getters.userId
+                    'userId': userId
                 }
             });
             console.log("fetchUserIngrd:")
@@ -68,9 +73,14 @@ const actions = {
         }
     },
     async saveNewIngrd({dispatch}, title) {
+        const userId = store.getters.userId
+        if(userId == ''){
+            console.log("error: userId unknown")
+            return
+        }
         const response = await axios.post('http://localhost:3000/api/ingrd/', {}, {
             headers: {
-                userId: store.getters.userId,
+                userId: userId,
                 name: title,
             }
         });
