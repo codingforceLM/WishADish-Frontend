@@ -2,6 +2,23 @@
   <v-container>
     <v-row wrap align-end>
       <h1>Eigene Gerichte</h1>
+      <v-snackbar
+          v-model="snackbar"
+          :timeout="2000"
+      >
+        {{ snackMsg }}
+
+        <template v-slot:action="{ attrs }">
+          <v-btn
+              color="pink"
+              text
+              v-bind="attrs"
+              @click="snackbar = false"
+          >
+            Close
+          </v-btn>
+        </template>
+      </v-snackbar>
       <v-dialog
           v-model="dialog"
           max-width="60%"
@@ -189,6 +206,8 @@ export default {
   name: "DishList",
   data: () => ({
     dialog: false,
+    snackbar: false,
+    snackMsg: "",
     ingredients: [],
     units: ["liter", "milliliter", "gramm", "kilogramm"],
     id: 1,
@@ -211,22 +230,26 @@ export default {
     },
     async saveDish() {
       if(this.entries.length === 0) {
-        // TODO display error notification
+        this.snackMsg = "Du musst mindestens eine Zutat wählen!";
+        this.snackbar = true;
         return;
       }
       for(let i=0;i<this.entries.length;i++) {
         if([this.entries[i].id, this.entries[i].amount, this.entries[i].unit].includes("")) {
-          // TODO display error notification
+          this.snackMsg = "Notwendiges Feld nicht ausgefüllt";
+          this.snackbar = true;
           return;
         }
       }
       console.log(this.entries)
       const response = await this.saveNewDish({title: this.title, entries: this.entries});
       if(response) {
-        // TODO some msg
+        this.snackMsg = "Gericht gespeichert!"
+        this.snackbar = true;
         this.dialog = false;
       } else {
-        // TODO error notification
+        this.snackMsg = "Gericht konnte nicht gespeichert werden!"
+        this.snackbar = true;
       }
     }
   },
