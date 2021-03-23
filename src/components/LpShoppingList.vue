@@ -43,12 +43,11 @@ export default {
     ...mapActions(["fetchShoppingListOpen"]),
   navDishes() {
     this.$router.push("/dish");
-  },
+  }},
   computed: mapGetters(["allShoppingLists"]),
   created() {
     this.fetchShoppingListOpen()
-  }
-}}
+  }}
 
 </script>
 
