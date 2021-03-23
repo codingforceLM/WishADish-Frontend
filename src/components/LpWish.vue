@@ -1,9 +1,10 @@
 <template>
   <v-container>
-    <v-row wrap align-end>
+    <v-row wrap align-end v-if="allUserWishDate != undefined">
       <h1 @click="navWishes">Gerichte Heute</h1>
       <div class="break"></div>
       <v-card
+
           width="100%"
           v-for="wish in allUserWishDate" :key="wish.id"
           class="my-1"

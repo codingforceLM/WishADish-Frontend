@@ -36,9 +36,6 @@ import {mapActions, mapGetters} from "vuex";
 
 export default {
   name: "WishDetails",
-  data:() => ({
-    date: this.WishCalendar.data().date
-  }),
   methods: {
     ...mapActions(["fetchUserWishToday"]),
   },
