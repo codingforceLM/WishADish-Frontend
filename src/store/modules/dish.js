@@ -80,8 +80,6 @@ const actions = {
 const mutations = {
     setUserDish: (state, userDish) => (state.userDish = userDish),
     setSingleDish: (state, singleDish) => (state.singleDish = singleDish),
-    // TODO maybe do it better - idk?
-    // dummy: (state) => (state)
 };
 
 
