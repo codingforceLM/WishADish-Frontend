@@ -8,30 +8,22 @@
           v-for="wish in allUserWishDate" :key="wish.id"
           class="my-1"
       >
-
         <v-row wrap>
           <v-col>
-            <v-list-item >
-              <v-list-item-title class="v-card__title">
-                {{ wish.daytime }}
-              </v-list-item-title>
-            </v-list-item>
+
+            <v-card-title class="v-card__title">
+              {{ wish.daytime }}
+            </v-card-title>
             <v-card class="ma-2">
-              <v-list-item >
-                <v-list-item-title class="v-card__title">
-                  {{ wish.name }}
-                </v-list-item-title>
-              </v-list-item>
-              <v-list-item >
-                <v-list-item-title class="v-card__title">
-                  {{ wish.groupname }}
-                </v-list-item-title>
-              </v-list-item>
+              <v-card-title >
+                {{ wish.name }}
+              </v-card-title>
+              <v-card-subtitle >
+                {{ wish.groupname }}
+              </v-card-subtitle>
             </v-card>
           </v-col>
-
         </v-row>
-
       </v-card>
 
     </v-row>
