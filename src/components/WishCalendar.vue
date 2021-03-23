@@ -4,6 +4,7 @@
       <v-date-picker
           v-model='date'
           full-width
+          elevation="5"
       ></v-date-picker>
     </v-layout>
   </v-container>
