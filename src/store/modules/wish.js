@@ -2,11 +2,13 @@ import axios from 'axios';
 import store from '@/store'
 
 const state = {
-    userWishDate: []
+    userWishDate: [],
+    userWishMonth: []
 };
 
 const getters = {
-    allUserWishDate:  state => state.userWishDate
+    allUserWishDate: state => state.userWishDate,
+    allUserWishMonth: state => state.userWishMonth
 };
 
 
@@ -16,6 +18,7 @@ const actions = {
             const date = new Date()
             let month = date.getMonth()+1
             let day = date.getDate()
+            let year = date.getFullYear()
             if(day<10){
                 day="0"+day
             }
@@ -26,7 +29,8 @@ const actions = {
                 headers: {
                     'userId': store.getters.userId,
                     'day': day,
-                    'month': month
+                    'month': month,
+                    'year': year
                 }
             });
             console.log("fetchUserWishToday:")
@@ -60,6 +64,26 @@ const actions = {
         } catch (error) {
             console.error(error);
         }
+    },
+    async fetchUserWishMonth({commit},{month,year}) {
+        try {
+            const response = await axios.get(`http://localhost:3000/api/wish/`, {
+                headers: {
+                    'userId': store.getters.userId,
+                    'month': month,
+                    'year': year
+                }
+            });
+            console.log("fetchUserWishMonth:")
+            console.log(response)
+            if (response.status == 200) {
+                commit('setUserWishMonth', response.data);
+            } else {
+                console.log("error: "+response.statusText)
+            }
+        } catch (error) {
+            console.error(error);
+        }
     }
 
 };
@@ -67,7 +91,9 @@ const actions = {
 
 const mutations = {
     setUserWishToday: (state, userWishDate) => (state.userWishDate = userWishDate),
-    setUserWishDate: (state, userWishDate) => (state.userWishDate = userWishDate)
+    setUserWishDate: (state, userWishDate) => (state.userWishDate = userWishDate),
+    setUserWishMonth: (state, userWishMonth) => (state.userWishMonth = userWishMonth),
+
 };
 
 
