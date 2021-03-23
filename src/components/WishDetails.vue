@@ -12,7 +12,7 @@
         <v-row wrap>
           <v-col>
 
-              <v-card-title class="v-card__title">
+              <v-card-title>
                 {{ wish.daytime }}
               </v-card-title>
             <v-card class="ma-2">
