@@ -258,6 +258,7 @@ export default {
     this.fetchDishes()
     this.fetchDeufaultIngrd()
     this.fetchUserIngrd()
+    this.$store.commit('setSingleDish', [])
     this.ingredients = this.$store.getters.allUserIngrd
     this.ingredients.concat(this.$store.getters.systemIngrd)
   },
