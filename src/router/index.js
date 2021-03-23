@@ -8,12 +8,18 @@ import Register from "../views/Register";
 import Dish from '../views/Dish.vue'
 import ShoppingList from '../views/ShoppingList'
 import Profile from "@/views/Profile";
+import LandingPage from "@/views/LandingPage"
 
 Vue.use(VueRouter)
 
 const routes = [
     {
         path: '/',
+        name: 'LandingPage',
+        component: LandingPage
+    },
+    {
+        path: '/group',
         name: 'Group',
         component: Group
     },
