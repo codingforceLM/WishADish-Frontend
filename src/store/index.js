@@ -5,8 +5,10 @@ import user from "@/store/modules/user";
 import ingrd from "@/store/modules/ingrd"
 import dish from "@/store/modules/dish"
 import wish from "@/store/modules/wish"
+import shoppinglist from "@/store/modules/shoppinglist"
 import authentication from "@/store/modules/authentication"
 import createPersistedState from 'vuex-persistedstate';
+
 
 Vue.use(Vuex)
 
@@ -17,7 +19,8 @@ export default new Vuex.Store({
         ingrd,
         dish,
         wish,
-        authentication
+        authentication,
+        shoppinglist
     },
     plugins: [createPersistedState({
         path: ['authentication.token', 'authentication.userId']
