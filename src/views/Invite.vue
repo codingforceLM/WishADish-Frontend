@@ -32,30 +32,31 @@ export default {
   methods: {
     ...mapActions(["updateNotification"])
   },
-  created() {
+  async created() {
     console.log(this.$route.params.id);
-    axios.post('http://localhost:3000/api/invite/', {}, {
+    const response = await axios.post('http://localhost:3000/api/invite/', {}, {
       headers: {
         inviteId: this.$route.params.id,
         userId: this.$store.getters.userId
       }
-    }).then(resp => {
-      console.log("user joined");
-      if(this.$store.getters.userId === "") {
-        this.updateNotification({s: true, m: "Nicht eingeloggt!"});
-        this.$router.replace("/login")
-        return;
-      }
-      const invId = this.$route.params.id
-      console.log(invId);
-      resp;
-      this.updateNotification({s: true, m: "Gruppe beigetreten!"});
-      this.$router.replace("/group")
-    }).catch(error => {
-      console.log(error);
-      this.updateNotification({s: true, m: "Konnte Gruppe nicht beitreten!"});
-      this.$router.replace("/group");
     });
+    if(response.status < 200 || response.status > 299 ) {
+      console.log(response);
+      //this.updateNotification({s: true, m: "Konnte Gruppe nicht beitreten!"});
+      this.$router.replace("/group");
+      return;
+    }
+
+    console.log("user joined");
+    if(this.$store.getters.userId === "") {
+      //this.updateNotification({s: true, m: "Nicht eingeloggt!"});
+      this.$router.replace("/login")
+      return;
+    }
+    const invId = this.$route.params.id
+    console.log(invId);
+    //this.updateNotification({s: true, m: "Gruppe beigetreten!"});
+    this.$router.replace("/group")
   }
 }
 </script>
