@@ -175,7 +175,7 @@ export default {
         return;
       }
 
-      this.link = "http://localhost:8080/invite/"+response.data.id;
+      this.link = "http://localhost:8080/#/invite/"+response.data.id;
       this.snackMsg = "Einladung erstellt!";
       this.snackbar = true;
     }
