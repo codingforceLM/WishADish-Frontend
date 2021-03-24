@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import {mapActions} from "vuex";
 import axios from 'axios';
 
 export default {
@@ -29,7 +30,7 @@ export default {
     snackMsg: "",
   }),
   methods: {
-
+    ...mapActions(["updateNotification"])
   },
   created() {
     console.log(this.$route.params.id);
@@ -39,18 +40,20 @@ export default {
         userId: this.$store.getters.userId
       }
     }).then(resp => {
-      // TODO add some kind of notification system
       console.log("user joined");
       if(this.$store.getters.userId === "") {
+        this.updateNotification({s: true, m: "Nicht eingeloggt!"});
         this.$router.replace("/login")
         return;
       }
       const invId = this.$route.params.id
       console.log(invId);
       resp;
+      this.updateNotification({s: true, m: "Gruppe beigetreten!"});
       this.$router.replace("/group")
     }).catch(error => {
       console.log(error);
+      this.updateNotification({s: true, m: "Konnte Gruppe nicht beitreten!"});
       this.$router.replace("/group");
     });
   }

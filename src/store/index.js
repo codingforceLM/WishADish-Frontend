@@ -7,6 +7,7 @@ import dish from "@/store/modules/dish"
 import wish from "@/store/modules/wish"
 import shoppinglist from "@/store/modules/shoppinglist"
 import authentication from "@/store/modules/authentication"
+import notification from "@/store/modules/notification";
 import createPersistedState from 'vuex-persistedstate';
 
 
@@ -20,7 +21,8 @@ export default new Vuex.Store({
         dish,
         wish,
         authentication,
-        shoppinglist
+        shoppinglist,
+        notification
     },
     plugins: [createPersistedState({
         path: ['authentication.token', 'authentication.userId']

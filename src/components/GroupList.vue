@@ -6,14 +6,14 @@
           v-model="snackbar"
           :timeout="2000"
       >
-        {{ snackMsg }}
+        {{snackMsg}}
 
         <template v-slot:action="{ attrs }">
           <v-btn
               color="pink"
               text
               v-bind="attrs"
-              @click="snackbar = false"
+              @click="updateNotification({m:'', s: false});"
           >
             Close
           </v-btn>
@@ -134,34 +134,53 @@ export default {
   name: "GroupList",
   data: () => ({
     dialog: false,
-    snackbar: false,
-    snackMsg: "",
     title: "",
   }),
   methods: {
-    ...mapActions(["fetchGroups", "fetchGroup", "saveNewGroup"]),
+    ...mapActions(["fetchGroups", "fetchGroup", "saveNewGroup", "updateNotification"]),
     changeDetails: function (id) {
       this.fetchGroup(id)
       console.log(id)
     },
     async saveGroup() {
       if(this.title === "") {
-        this.snackMsg = "Notwendiges Feld nicht ausgefüllt!"
-        this.snackbar = true;
+        // this.snackMsg = "Notwendiges Feld nicht ausgefüllt!"
+        // this.snackbar = true;
+        this.updateNotification({m: "Notwendiges Feld nicht ausgefüllt!", s: true});
         return;
       }
 
       const response = this.saveNewGroup(this.title);
       if(response) {
-        this.snackMsg = "Gruppe erstellt!";
+        //this.snackMsg = "Gruppe erstellt!";
+        this.updateNotification({m: "Gruppe erstellt!", s: true})
         this.dialog = false;
       } else {
-        this.snackMsg = "Gruppe konnte nicht erstellt werden"
+        //this.snackMsg = "Gruppe konnte nicht erstellt werden"
+        this.updateNotification({m: "Gruppe konnte nicht erstellt werden", s: true})
       }
-      this.snackbar = true;
+      //this.snackbar = true;
     }
   },
-  computed: mapGetters(["allGroups", "singleGroup"]),
+  computed: {
+    ...mapGetters(["allGroups", "singleGroup", "notMsg", "showState"]),
+    snackbar: {
+      set (value) {
+        this.$store.commit("setShow", value);
+      },
+      get () {
+        return this.$store.getters.showState;
+      }
+    },
+    snackMsg: {
+      set (value) {
+        this.$store.commit("setMsg", value);
+      },
+      get () {
+        return this.$store.getters.notMsg;
+      }
+    }
+  },
   created() {
     this.fetchGroups()
   },
