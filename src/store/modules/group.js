@@ -47,7 +47,21 @@ const actions = {
             console.error(error);
         }
     },
+    async saveNewGroup({dispatch}, title) {
+        const response = await axios.post('http://localhost:3000/api/group', {}, {
+            headers: {
+                "userId": store.getters.userId,
+                "name": title
+            }
+        });
 
+        if(response.status === 400 || response.status === 404) {
+            return false;
+        } else {
+            dispatch('fetchGroups');
+            return true;
+        }
+    }
 };
 
 
