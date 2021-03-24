@@ -169,7 +169,7 @@ export default {
         this.$store.commit("setShow", value);
       },
       get () {
-        return this.$store.getters.showState;
+        return this.$store.state.show;
       }
     },
     snackMsg: {
@@ -177,7 +177,7 @@ export default {
         this.$store.commit("setMsg", value);
       },
       get () {
-        return this.$store.getters.notMsg;
+        return this.$store.state.msg;
       }
     }
   },
