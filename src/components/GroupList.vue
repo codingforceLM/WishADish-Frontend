@@ -2,15 +2,78 @@
   <v-container>
     <v-row wrap align-end>
       <h1>Gruppen</h1>
-      <v-btn
-          class="mx-2"
-          dark
-          color="indigo"
+      <v-snackbar
+          v-model="snackbar"
+          :timeout="2000"
       >
-        <v-icon dark>
-          mdi-plus
-        </v-icon>
-      </v-btn>
+        {{snackMsg}}
+
+        <template v-slot:action="{ attrs }">
+          <v-btn
+              color="pink"
+              text
+              v-bind="attrs"
+              @click="updateNotification({m:'', s: false});"
+          >
+            Close
+          </v-btn>
+        </template>
+      </v-snackbar>
+      <v-dialog
+          v-model="dialog"
+          max-width="60%"
+          scrollable
+      >
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+              class="mx-2"
+              dark
+              color="indigo"
+              v-bind="attrs"
+              v-on="on"
+          >
+            <v-icon dark>
+              mdi-plus
+            </v-icon>
+          </v-btn>
+
+        </template>
+        <v-card>
+          <v-card-title>
+            <span class="headline font-weight-bold">Gruppe erstellen</span>
+          </v-card-title>
+          <v-container fluid>
+            <v-row>
+              <v-col
+                  cols="12"
+              >
+                <v-text-field
+                    label="Titel"
+                    v-model="title"
+                    required
+                ></v-text-field>
+              </v-col>
+            </v-row>
+          </v-container>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+                color="blue darken-1"
+                text
+                @click="dialog = false"
+            >
+              Close
+            </v-btn>
+            <v-btn
+                color="blue darken-1"
+                text
+                @click="saveGroup"
+            >
+              Save
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
       <div class="break"></div>
       <v-col align="start">
 
@@ -69,14 +132,55 @@ import {mapActions, mapGetters} from "vuex";
 
 export default {
   name: "GroupList",
+  data: () => ({
+    dialog: false,
+    title: "",
+  }),
   methods: {
-    ...mapActions(["fetchGroups", "fetchGroup"]),
+    ...mapActions(["fetchGroups", "fetchGroup", "saveNewGroup", "updateNotification"]),
     changeDetails: function (id) {
       this.fetchGroup(id)
       console.log(id)
+    },
+    async saveGroup() {
+      if(this.title === "") {
+        // this.snackMsg = "Notwendiges Feld nicht ausgefüllt!"
+        // this.snackbar = true;
+        this.updateNotification({m: "Notwendiges Feld nicht ausgefüllt!", s: true});
+        return;
+      }
+
+      const response = this.saveNewGroup(this.title);
+      if(response) {
+        //this.snackMsg = "Gruppe erstellt!";
+        this.updateNotification({m: "Gruppe erstellt!", s: true})
+        this.dialog = false;
+      } else {
+        //this.snackMsg = "Gruppe konnte nicht erstellt werden"
+        this.updateNotification({m: "Gruppe konnte nicht erstellt werden", s: true})
+      }
+      //this.snackbar = true;
     }
   },
-  computed: mapGetters(["allGroups", "singleGroup"]),
+  computed: {
+    ...mapGetters(["allGroups", "singleGroup", "notMsg", "showState"]),
+    snackbar: {
+      set (value) {
+        this.$store.commit("setShow", value);
+      },
+      get () {
+        return this.$store.state.show;
+      }
+    },
+    snackMsg: {
+      set (value) {
+        this.$store.commit("setMsg", value);
+      },
+      get () {
+        return this.$store.state.msg;
+      }
+    }
+  },
   created() {
     this.fetchGroups()
   },

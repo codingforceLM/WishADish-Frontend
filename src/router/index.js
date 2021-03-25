@@ -9,6 +9,7 @@ import Dish from '../views/Dish.vue'
 import ShoppingList from '../views/ShoppingList'
 import Profile from "@/views/Profile";
 import LandingPage from "@/views/LandingPage"
+import Invite from "@/views/Invite"
 
 Vue.use(VueRouter)
 
@@ -51,12 +52,18 @@ const routes = [
         path: '/shoppinglist',
         name: 'ShoppingList',
         component: ShoppingList
-    }, {
+    },
+    {
 
         path: '/ingrd',
         name: 'Ingrd',
         component: Ingrd
     },
+    {
+        path: "/invite/:id",
+        name: "Invite",
+        component: Invite
+    }
 ]
 
 const router = new VueRouter({
