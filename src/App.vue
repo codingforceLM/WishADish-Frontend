@@ -23,6 +23,14 @@
       >
         <v-icon>Login</v-icon>
       </v-btn>
+      <v-btn
+          v-if="$store.getters.token == ''"
+          text
+          class="v-card__title"
+          @click='$router.push("/register")'
+      >
+        <v-icon>Registrieren</v-icon>
+      </v-btn>
       <v-btn v-if="$store.getters.token != ''" @click="logout" text class="v-card__title">
         <v-icon>Logout</v-icon>
       </v-btn>

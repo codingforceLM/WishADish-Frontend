@@ -94,6 +94,30 @@ const actions = {
             dispatch('fetchShoppingLists');
             return true;
         }
+    },
+    async saveEditedShoppingList({dispatch}, {shoppinglist, name, done}) {
+        try {
+            const response = await axios.put("http://localhost:3000/api/list/", {}, {
+                headers: {
+                    shoppinglist: JSON.stringify(shoppinglist),
+                    name: name,
+                    done: done
+                }
+            });
+            console.log("Status: " + response.status);
+
+            if (response.status === 400 || response.status === 404) {
+                console.log("Couldnt save shopping list");
+                return false;
+            } else {
+                dispatch('fetchShoppingList', store.getters.singleShoppingList.id);
+                dispatch('fetchShoppingLists');
+                return true;
+            }
+        } catch (e) {
+            console.log("Couldnt save shopping list");
+            return false;
+        }
     }
 };
 
