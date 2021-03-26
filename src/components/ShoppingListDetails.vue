@@ -246,14 +246,13 @@ export default {
       }
 
       for(let i=0;i<this.entries.length;i++) {
-
+        let entry = this.entries[i];
         if([entry.ingredient, entry.amount, entry.unit, entry.done].includes("")) {
           this.snackMsg = "Notwendiges Feld nicht ausgefüllt!";
           this.snackbar = true;
           return;
         }
-
-        let entry = this.entries[i];
+        
         sl.ingredients.push({
           id: entry.ingredient,
           amount: entry.amount,
