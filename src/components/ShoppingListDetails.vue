@@ -2,10 +2,28 @@
   <v-container>
     <v-row wrap align-end>
       <h1>{{singleShoppingList.name}}</h1>
+      <v-snackbar
+          v-model="snackbar"
+          :timeout="2000"
+      >
+        {{ snackMsg }}
+
+        <template v-slot:action="{ attrs }">
+          <v-btn
+              color="pink"
+              text
+              v-bind="attrs"
+              @click="snackbar = false"
+          >
+            Close
+          </v-btn>
+        </template>
+      </v-snackbar>
       <v-dialog
           v-model="dialog"
           max-width="60%"
           scrollable
+          persistent
       >
         <template v-slot:activator="{ on, attrs }">
           <v-btn
@@ -14,6 +32,7 @@
               color="indigo"
               v-bind="attrs"
               v-on="on"
+              @click="fillData"
           >
             <v-icon dark>
               mdi-format-list-bulleted-square
@@ -28,7 +47,7 @@
           <v-container fluid>
             <v-row>
               <v-col
-                  cols="12"
+                  cols="10"
               >
                 <v-text-field
                     label="Titel"
@@ -36,7 +55,14 @@
                     required
                 ></v-text-field>
               </v-col>
+              <v-col cols="2">
+                <v-switch
+                    v-model="sldone"
+                    label='Fertig'
+                ></v-switch>
+              </v-col>
             </v-row>
+
             <v-row>
               <v-col
                   cols="12"
@@ -50,7 +76,7 @@
                         no-gutters
                     >
                       <v-col
-                          cols="7"
+                          cols="5"
                       >
                         <v-select
                             :items="ingredients"
@@ -77,6 +103,14 @@
                             label="Einheit"
                             v-model="entry.unit"
                         ></v-select>
+                      </v-col>
+                      <v-col
+                        cols="2"
+                      >
+                        <v-switch
+                            v-model="entry.done"
+                            label='in Besitz'
+                        ></v-switch>
                       </v-col>
                       <v-col
                           cols="1"
@@ -115,7 +149,7 @@
             <v-btn
                 color="blue darken-1"
                 text
-                @click="dialog = false"
+                @click="closeList"
             >
               Close
             </v-btn>
@@ -192,22 +226,88 @@ export default {
     units: ["liter", "milliliter", "gramm", "kilogramm"],
     id: 1,
     title: "",
-    entries: [{id: 1, ingredient: {id:"", name:""}, amount: "", unit: ""}]
+    sldone: false,
+    entries: [],
+    entriesCopy: [],
   }),
   methods: {
-    ...mapActions(["fetchShoppingList"]),
+    ...mapActions(["fetchShoppingList", "fetchUserIngrd", "fetchDeufaultIngrd", "fetchAssociatedIngrd", "saveEditedShoppingList"]),
     async saveList() {
-      //
+      let sl = {
+        id: this.singleShoppingList.id,
+        ingredients: []
+      };
+      console.log(this.entries);
+
+      for(let i=0;i<this.entries.length;i++) {
+        let entry = this.entries[i];
+        sl.ingredients.push({
+          id: entry.ingredient,
+          amount: entry.amount,
+          unit: entry.unit,
+          done: entry.done
+        });
+      }
+
+      console.log(sl);
+
+      const response = await this.saveEditedShoppingList({shoppinglist: sl, name: this.title, done: this.sldone});
+      if(response) {
+        this.snackMsg = "Einkaufsliste aktualisiert!";
+        this.snackbar = true;
+        this.dialog = false;
+      } else {
+        this.snackMsg = "Einkaufsliste konnte nicht aktualisiert werden!";
+        this.snackbar = true;
+      }
+    },
+    closeList() {
+      this.entries = this.entriesCopy;
+      this.dialog = false;
     },
     newEntry() {
-      //
+      this.entries.push({
+            id: this.id,
+            ingredient: "",
+            amount: "",
+            unit: "",
+            done: false,
+      });
+      this.id++;
     },
-    removeEntry() {
-      //
+    removeEntry(entry) {
+      let index = this.entries.indexOf(entry);
+      this.entries.splice(index, 1);
+    },
+    fillData() {
+      const sli = this.singleShoppingList.ingredients;
+      this.entries = [];
+      for(let i=0;i<sli.length;i++) {
+        let ingrd = sli[i];
+        this.entries.push({
+          id: this.id,
+          ingredient: ingrd.id,
+          amount: ingrd.amount,
+          unit: ingrd.unit,
+          done: ingrd.done,
+        });
+        this.id++;
+      }
+      this.title = this.singleShoppingList.name;
+      this.sldone = this.singleShoppingList.done;
+
+      this.entriesCopy = this.entries;
+      console.log(this.entries);
     }
   },
-  computed: mapGetters(["singleShoppingList"]),
-
+  computed: mapGetters(["singleShoppingList", "allUserIngrd", "systemIngrd", "associatedIngrd"]),
+  async created () {
+    this.fetchUserIngrd();
+    this.fetchDeufaultIngrd();
+    await this.fetchAssociatedIngrd()
+    this.ingredients = this.$store.getters.associatedIngrd
+    this.ingredients = this.ingredients.concat(this.$store.getters.systemIngrd)
+  }
 }
 </script>
 
