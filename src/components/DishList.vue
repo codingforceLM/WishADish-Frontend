@@ -209,7 +209,7 @@ export default {
     snackbar: false,
     snackMsg: "",
     ingredients: [],
-    units: ["liter", "milliliter", "gramm", "kilogramm"],
+    units: ["l", "ml", "g", "kg", "Stk."],
     id: 1,
     title: "",
     entries: [{id: 1, ingredient: {id:"", name:""}, amount: "", unit: ""}]

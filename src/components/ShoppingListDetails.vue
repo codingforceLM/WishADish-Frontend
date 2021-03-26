@@ -223,7 +223,7 @@ export default {
     snackbar: false,
     snackMsg: "",
     ingredients: [],
-    units: ["liter", "milliliter", "gramm", "kilogramm"],
+    units: ["l", "ml", "g", "kg", "Stk."],
     id: 1,
     title: "",
     sldone: false,
@@ -252,7 +252,7 @@ export default {
           this.snackbar = true;
           return;
         }
-        
+
         sl.ingredients.push({
           id: entry.ingredient,
           amount: entry.amount,
