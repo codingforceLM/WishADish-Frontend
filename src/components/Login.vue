@@ -69,8 +69,6 @@ import {mapActions, mapGetters} from "vuex";
       ...mapActions(["login", "logout"]),
       async logUserIn() {
         try {
-          console.log("email: "+this.email);
-          console.log("password: "+this.password);
           const loggedIn = await this.login({email: this.email, password: this.password});
 
           if(loggedIn) {
