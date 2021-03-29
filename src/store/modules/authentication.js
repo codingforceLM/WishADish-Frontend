@@ -12,8 +12,6 @@ const getters = {
 
 const actions = {
     async login({commit}, {email, password}) {
-        console.log("email: "+email);
-        console.log("password: "+password);
         const response = await axios.post('http://localhost:3000/api/login/', {}, {
             headers: {
                 'email': email,
