@@ -34,7 +34,7 @@
               v-on="on"
           >
             <v-icon dark>
-              mdi-format-list-bulleted-square
+              mdi-plus
             </v-icon>
           </v-btn>
 
