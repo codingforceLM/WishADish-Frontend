@@ -101,8 +101,33 @@ const actions = {
         } catch (error) {
             console.error(error);
         }
-    }
+    },
+    async saveNewWish({dispatch}, {daytime, dish, group, date}) {
+        console.log("params", daytime, dish, group, date)
+        try {
+            const response = await axios.post("http://localhost:3000/api/wish", {}, {
+                headers: {
+                    userId: store.getters.userId,
+                    groupId: group,
+                    dishId: dish,
+                    daytime: daytime,
+                    wishDate: date
+                }
+            });
 
+            if (response.status < 200 || response > 299) {
+                console.log("Couldnt save new Wish");
+                return false;
+            } else {
+                console.log("Saved new Wish");
+                dispatch("fetchUserWishToday");
+                return true;
+            }
+        } catch (e) {
+            console.log("Couldnt save new Wish");
+            return false;
+        }
+    }
 };
 
 
